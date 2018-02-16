@@ -28,7 +28,7 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "start": "npm run node_modules/webpack/bin/webpack.js && nodemon --exec babel-node -- bin/www",
+    "start": "npm run webpack && nodemon --exec babel-node -- bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
