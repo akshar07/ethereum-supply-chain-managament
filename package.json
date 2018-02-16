@@ -31,7 +31,10 @@
     "start": "npm run node_modules/webpack/bin/webpack.js && nodemon --exec babel-node -- bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall":{ 
+      "heroku-postbuild": "webpack --config webpack.config.js"
+    }
   },
   "devDependencies": {
     "chai": "^4.1.2",
