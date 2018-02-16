@@ -10,3 +10,6 @@
 .back{
     margin-left: 20px;
 }
+.dist_list{
+    cursor: pointer;
+}

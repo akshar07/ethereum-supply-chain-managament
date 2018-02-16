@@ -27,6 +27,8 @@ import {CarTable} from './cartable';
         this.setIdForTransfer=this.setIdForTransfer.bind(this)
         this.transferCar=this.transferCar.bind(this);
         this.handleBack=this.handleBack.bind(this);
+        this.handleTargetAddressChange=this.handleTargetAddressChange.bind(this);
+        this.handleDistributorChange=this.handleDistributorChange.bind(this);
     }
     addNewCar(){
         axios.post('manafacturer/addCar',{
@@ -35,9 +37,9 @@ import {CarTable} from './cartable';
             privateKey:this.state.privateKey,
             publicKey:this.state.publicKey
         }).then(function(response){
-            console.log(response);
+            alert("Car Added");
         }).catch(function(error) {
-            console.log(error);
+            alert("sorry, please try again");
         });
     }
     getMyCars() {
@@ -77,7 +79,7 @@ import {CarTable} from './cartable';
         }).then((response)=> {
           console.log(response);
           this.setState({searchResult:response.data.name}).bind(this);
-          console.log(this.state.searchResult);
+          
         })
       }
       setIdForTransfer(id){
@@ -87,17 +89,25 @@ import {CarTable} from './cartable';
         });
     }
     transferCar(){
-        axios.post('/transferCar',{
-            privateKey:this.state.privateKey,
-            publicKey:this.state.publicKey,
-            targetAdd:this.state.targetAddress,
-            id:this.state.carId,
-        });
+        if(this.state.publicKey===this.state.targetAddress){
+            alert("sorry, You cannot transfer cars to yourself");
+            return;
+        }
+        else{
+            axios.post('/transferCar',{
+                privateKey:this.state.privateKey,
+                publicKey:this.state.publicKey,
+                targetAdd:this.state.targetAddress,
+                id:this.state.carId,
+            }).then(()=>{
+                alert("Car Transferred ! Please check back after 30 sec to see the changes");
+            })
+        }
     }
     handleTargetAddressChange(e){
         this.setState({targetAddress: e.target.value});
     }
-    handleDistributoChange(add){
+    handleDistributorChange(add){
         this.setState({targetAddress: add});
     }
     handleBack(){
@@ -125,10 +135,11 @@ import {CarTable} from './cartable';
             transferSection=
                 <div className="right">
                     Traget Address: <input type="text" name="target" value={this.state.targetAddress} onChange={this.handleTargetAddressChange}/> <br />
+                    <br />
                     <p>Or Choose one of the Following Distributor</p>
-                    <ul>
-                        <li onClick={()=>this.handleDistributoChange("0xc5Bd1de6Abc8f9217D94253983362Dd3C06Fb7ca")}>Stevens Creek</li>
-                        <li onClick={()=>this.handleDistributoChange("0x75e4402700b548eE98E11CdC8435bd7DC18Cd98e")}>Capitol</li>
+                    <ul className="dist_list">
+                        <li onClick={()=>this.handleDistributorChange("0xc5Bd1de6Abc8f9217D94253983362Dd3C06Fb7ca")}>Stevens Creek</li>
+                        <li onClick={()=>this.handleDistributorChange("0x75e4402700b548eE98E11CdC8435bd7DC18Cd98e")}>Capitol</li>
                     </ul>
                 </div>
         }

@@ -1,4 +1,5 @@
 import React,{Component} from'react';
+import '../css/carTable.css';
 
  export class CarTable extends Component{
     constructor(props){
@@ -31,11 +32,11 @@ import React,{Component} from'react';
                     <tbody>
                         {this.props.cars.map(car=>{
                             return (
-                                <tr className={this.state.selectedCar==car.id?"active":""}> 
+                                <tr key={car.id} className={this.state.selectedCar==car.id?"active":""}> 
                                     <td>{car.name}</td>
                                     <td>{car.number}</td>
                                     <td>{car.id}</td>
-                                    <td onClick={()=>this.handleTranferData(car.id)}>Transfer</td>
+                                    <td onClick={()=>this.handleTranferData(car.id)} className="transfer">Transfer</td>
                                 </tr>
                             )
                         })}
