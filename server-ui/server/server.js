@@ -6,7 +6,7 @@ const contractAddress=require('./contract').address;
 //contract end
 const express=require('express');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/transactions');
+mongoose.connect(process.env.MONGODB_URI);
 const util = require('util');
 const router = require('./routes/routes.js')
 var manafacturerRouter=require('./routes/manafacturer.js');
@@ -52,7 +52,6 @@ pool.on('error', (err, client) => {
   });
 
   //common 
-
   app.get('/getCar',function(req,res){ 
     let carNumber=web3.utils.asciiToHex(req.query.carNumber);
     SCMContract.methods.getCar(carNumber).call(function(error,result){
@@ -87,7 +86,7 @@ app.get('/myCars',getCarIds,(req,res)=>{
     Promise.all(promises).then((cars)=>{
         console.log(cars);
         res.send(cars);
-    })
+    }).catch((error)=>console.log(error));
     
 })
 function getOneCar(id){
@@ -98,7 +97,31 @@ function getOneCar(id){
         else{
             console.log(result);
         }
-    }).then((car)=> {car.id=id;return car})
+    }).then((car)=> {car.id=id;return car}).catch((err=>console.log(err)))
 
 }
+//transfer car
+transferCar=require('./transferCar');
+app.post('/transferCar',(req,res)=>{
+    let priKey=req.body.privateKey;
+    let pubKey=req.body.publicKey;
+    let targetAdd=req.body.targetAdd;
+    let carId=req.body.id;
+    transferCar(pubKey,priKey,targetAdd,carId);
+});
+//get transactions
+const TransactionSchema=require('./Schema/transactionSchema');
+app.get('/allTransactions',(req,res)=>{
+    let Transaction= mongoose.model('transaction',TransactionSchema);
+    Transaction.find({},(err,doc)=>{
+        if(err){
+
+            console.log(err);
+        }
+        else{
+            res.send(doc);
+        }
+    })
+})
+
 module.exports=app;

@@ -29,7 +29,7 @@ function deployContract() {
     console.log("abi", abi);  
 }
 function sendRaw(rawTx) {
-    var privateKey = new Buffer('', 'hex');
+    var privateKey = new Buffer(process.env.PKEY, 'hex');
     var transaction = new tx(rawTx);
     transaction.sign(privateKey);
     var serializedTx = transaction.serialize().toString('hex');

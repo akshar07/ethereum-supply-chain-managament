@@ -13,13 +13,13 @@ const sendTxn=require('../rawTx');
 const manafactuerRouting=require('express').Router();
 
 //manafacturere routes
-manafactuerRouting.post('/addCar',async function(req,res){
+manafactuerRouting.post('/addCar',function(req,res){
     let name=req.body.name;
     let type="manafacturer";
     let number=req.body.no;
     let publicKey=req.body.publicKey;
     let privateKey=req.body.privateKey;
-    let data= await addCar(publicKey,
+    let data= addCar(publicKey,
                     privateKey,
                     name,type,number);
     res.send(data);
@@ -55,13 +55,6 @@ function addCar(senderAddress, privateKey,_name,_type,_number){
           };
           let hash= sendTxn(privateKey, addTx,function(trHash){
             console.log("ran db");
-            let Transaction= mongoose.model('transaction',TransactionSchema);
-            let transactionModel=new Transaction({
-                name:_name,
-                carNumber:_number,
-                address:trHash
-            });
-            transactionModel.save();
           });
           console.log(hash)
           return hash;

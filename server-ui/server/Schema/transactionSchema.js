@@ -1,10 +1,10 @@
 const mongoose=require('mongoose');
 
 const TransactionSchema=new mongoose.Schema({
-    name:String,
-    carNumber:String,
-    address:String,
-    trHash:String
+    sender:String,
+    target:String,
+    carId:Number,
+    address:String
 });
 
 module.exports=TransactionSchema;
