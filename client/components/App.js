@@ -16,15 +16,16 @@ class App extends Component {
       <div className="directions">
           <h3> Directions to use this application </h3>
           <p>
-            1. First you need an address and private key. 
+            1. First you need an address and private key.
             Dont worry about the security, you are not using this for real money!
             If you were using this for real money, you'd be much, much more careful about this process, though, right?
+            So go to https://www.myetherwallet.com/ and type your password to generate a wallet.
           </p> 
           <p>
             2. After completeing step 1, you would be given an option to download the 'keystore file'. Download it. 
           </p>
           <p>
-            3. Go back to EtherWaallet - select 'view wallet info'- upload your key and enter the same password. 
+            3. Go back to EtherWallet - select 'view wallet info'- upload your key and enter the same password. 
           </p>
           <p>  
             4.You will have your public address and private key available to you. Use this in the application for transactions. 
