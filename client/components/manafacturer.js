@@ -134,7 +134,7 @@ import {CarTable} from './cartable';
         if(this.state.isBeingTransferred){
             transferSection=
                 <div className="right">
-                    Traget Address: <input type="text" name="target" value={this.state.targetAddress} onChange={this.handleTargetAddressChange}/> <br />
+                    Target Address: <input type="text" name="target" value={this.state.targetAddress} onChange={this.handleTargetAddressChange}/> <br />
                     <br />
                     <p>Or Choose one of the Following Distributor</p>
                     <ul className="dist_list">
