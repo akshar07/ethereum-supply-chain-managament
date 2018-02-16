@@ -28,7 +28,7 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "start": "npm run webpack && nodemon --exec babel-node -- bin/www",
+    "start": "npm run node_modules/webpack/bin/webpack.js && nodemon --exec babel-node -- bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -36,7 +36,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "supertest": "^3.0.0",
-    "webpack": "^3.10.0",
+    "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   }
 }
