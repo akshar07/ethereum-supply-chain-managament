@@ -30,6 +30,7 @@ import {CarTable} from './cartable';
         this.handleTargetAddressChange=this.handleTargetAddressChange.bind(this);
         this.handleDistributorChange=this.handleDistributorChange.bind(this);
     }
+    //add new car
     addNewCar(){
         axios.post('manafacturer/addCar',{
             name: this.state.carName,
@@ -42,6 +43,7 @@ import {CarTable} from './cartable';
             alert("sorry, please try again");
         });
     }
+    //get users cars
     getMyCars() {
         axios.get('/myCars',{
             params:{
@@ -71,6 +73,7 @@ import {CarTable} from './cartable';
     handleCarQuery(e){
         this.setState({numberQuery: e.target.value});
     }
+    //get car for transfer
     getCar(){
         axios.get('/manafacturer/getCar',{
           params:{

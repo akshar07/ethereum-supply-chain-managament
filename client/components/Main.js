@@ -19,7 +19,6 @@ class Main extends Component{
                 <Route path='/regulator' component={Regulator}/>
               </Switch>
             </div>
-            
         )
     }
 }
