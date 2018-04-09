@@ -7,7 +7,7 @@ function sendTxn(privateKey,rawTx,dbInsert){
     web3.eth.sendSignedTransaction(
         '0x' + serializedTx, function(err, txnHash) {
           if(err) {
-            console.log("txn err", err);
+            return console.log("txn err", err);
           } else {
             console.log("txn result", txnHash);
             dbInsert(txnHash);

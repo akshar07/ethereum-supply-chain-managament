@@ -33,8 +33,6 @@ contract SCM {
     return(c.name,c.carNumber,msg.sender);
   }
     function getCarsByUser(address _owner) external view returns(uint[]){
-        // string[] memory cnames = new string[](userCarCount[msg.sender]);
-        // string[] memory cnumbers=new string[](userCarCount[msg.sender]);
         uint[] memory carId=new uint[](userCarCount[_owner]);
         uint counter = 0;
         for (uint i = 0; i < cars.length; i++) {
